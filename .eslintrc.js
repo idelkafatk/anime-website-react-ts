@@ -18,10 +18,10 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   root: true,
   rules: {
-    // "react/react-in-jsx-scope": ["off"],
-    // "react/jsx-uses-react": ["off"],
-    // "react/jsx-props-no-spreading": ["warn"],
-    // "react/no-unescaped-entities": ["off"],
+    "react/react-in-jsx-scope": ["off"],
+    "react/jsx-uses-react": ["off"],
+    "react/jsx-props-no-spreading": ["warn"],
+    "react/no-unescaped-entities": ["off"],
   },
   parserOptions: {
     ecmaVersion: 2021,
