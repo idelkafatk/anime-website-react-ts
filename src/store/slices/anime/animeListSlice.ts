@@ -1,32 +1,24 @@
-// export const initialState: IAnimeList = {
-//   data: [],
-//   paging: {
-//     next: null,
-//   },
-// }
-
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-  placeholderData: 'Loading...',
+interface IPageState {
+  currentOffset: number
+  limit: number
 }
 
-interface IAction {
-  type: string
-  payload: any
+const initialState: IPageState = {
+  currentOffset: 0,
+  limit: 20,
 }
 
-const placeholderSlice = createSlice({
-  name: 'placeholder',
-  initialState: {
-    placeholderData: 'Loading...',
-  },
+const currentOffsetSlice = createSlice({
+  name: 'currentOffset',
+  initialState,
   reducers: {
-    updatePlaceholderData: (state, action) => {
-      state.placeholderData = action.payload
+    updateCurrentOffset: (state, action) => {
+      state.currentOffset = action.payload
     },
   },
 })
 
-export const { updatePlaceholderData } = placeholderSlice.actions
-export default placeholderSlice.reducer
+export const { updateCurrentOffset } = currentOffsetSlice.actions
+export default currentOffsetSlice.reducer

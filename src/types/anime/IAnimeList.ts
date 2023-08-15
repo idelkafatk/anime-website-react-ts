@@ -14,6 +14,7 @@ export interface IAnimeItem {
 export default interface IAnimeList {
   data: IAnimeItem[]
   paging: {
-    next: string | null
+    previous?: string
+    next?: string
   }
 }

@@ -6,7 +6,7 @@ const port = 8080
 
 corsProxy
   .createServer({
-    originWhitelist: [], // Добавьте домены, которые вы хотите разрешить
+    originWhitelist: [],
     requireHeader: ['origin', 'x-requested-with'],
     removeHeaders: ['cookie', 'cookie2'],
   })

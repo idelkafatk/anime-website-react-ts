@@ -4,6 +4,15 @@ export interface IAnimeDetails {
   images: IAnimeImages
   trailer: IAnimeTrailer
   synopsis: string
+  genres: IAnimeGenre[]
+  score: number
+}
+
+export interface IAnimeGenre {
+  mal_id: number
+  type: string
+  name: string
+  url: string
 }
 
 export interface IAnimeTrailer {
@@ -23,7 +32,7 @@ export interface IAnimeImages {
   jpg: {
     image_url: string
     small_image_url: string
-    large_image_ur: string
+    large_image_url: string
   }
 }
 

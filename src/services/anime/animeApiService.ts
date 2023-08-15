@@ -13,13 +13,14 @@ const mal = axios.create({
 })
 
 const unOfficialMal = axios.create({
-  baseURL: CORS_ANYWHERE_URL + API_URL_UMAL,
+  baseURL: API_URL_UMAL,
 })
 
 export const AnimeService = {
-  async getAll(searchQuery: string, limit: number) {
+  async getAll(offset: number, searchQuery: string, limit: number) {
     return mal.get('/anime', {
       params: {
+        offset,
         q: searchQuery,
         limit,
       },

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import placeholderReducer from './slices/anime/animeListSlice'
+import currentOffsetSlice from './slices/anime/animeListSlice'
+import searchQuery from './slices/anime/animeSearchSlice'
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    placeholder: placeholderReducer,
+    offset: currentOffsetSlice,
+    searchQuery,
   },
 })
 

@@ -1,25 +1,18 @@
 import React, { FC } from 'react'
-import { Button, Input, Layout } from 'antd'
+import { Button, Layout } from 'antd'
 import { styled } from 'styled-components'
 import { useHistory, useLocation } from 'react-router-dom'
 import { ArrowLeftOutlined } from '@ant-design/icons'
+import SearchContainer from './SearchContainer'
 
 const { Header } = Layout
-const { Search } = Input
 
 const StyledHeader = styled(Header)`
   background-color: #191919;
-  position: fixed;
-  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-`
-
-const StyledSearch = styled(Search)`
-  max-width: 300px;
-  color: #039750;
 `
 
 const StyledArrowLeftOutlined = styled(ArrowLeftOutlined)`
@@ -34,20 +27,22 @@ const StyledArrowLeftOutlined = styled(ArrowLeftOutlined)`
 `
 
 const Navbar: FC = () => {
+  const homePage = '/'
   const history = useHistory()
   const location = useLocation()
-  const isHomePage = location.pathname === '/'
+  const isHomePage = location.pathname === homePage
 
   return (
-    <Layout>
-      <StyledHeader>
-        {!isHomePage && (
-          <StyledArrowLeftOutlined onClick={() => history.push('/')} />
-        )}
-        <StyledSearch placeholder="Введите название аниме" enterButton />
-        <Button type="primary">Primary Btn</Button>
-      </StyledHeader>
-    </Layout>
+    <StyledHeader>
+      {!isHomePage && (
+        <StyledArrowLeftOutlined
+          style={{ display: 'flex', justifySelf: 'center' }}
+          onClick={() => history.push(homePage)}
+        />
+      )}
+      <SearchContainer />
+      <Button type="primary">Primary Btn</Button>
+    </StyledHeader>
   )
 }
 
