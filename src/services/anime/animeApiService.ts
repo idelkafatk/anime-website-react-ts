@@ -30,4 +30,13 @@ export const AnimeService = {
   async getAnimeDetail(animeId: number) {
     return unOfficialMal.get(`/anime/${animeId}/full`)
   },
+
+  async getTop(ranking_type: string, limit: number) {
+    return mal.get('/anime/ranking', {
+      params: {
+        ranking_type,
+        limit,
+      },
+    })
+  },
 }

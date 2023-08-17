@@ -9,22 +9,32 @@ interface INavigationItemProps {
   path: string
 }
 
-const StyledNavigationItem = styled.div<{ active: string }>`
+const StyledNavigationItem = styled.div<{
+  active: string
+  isRankType?: boolean
+}>`
   display: flex;
   width: 220px;
   height: 40px;
-  justify-content: center;
+  padding-left: 10px;
   border-radius: 5px;
   background: transparent;
   margin: 5px 10px 0 10px;
-  background: ${({ active }) => active === 'true' && 'black'};
+  cursor: pointer;
+  background: ${({ active, isRankType }) =>
+    active === 'true' ? (isRankType ? '#039750' : 'black') : null};
 
   &:hover {
-    background: black;
+    background: ${({ isRankType }) => (isRankType ? '#039750' : 'black')};
   }
 `
 
-const StyledTitle = styled.span`
+export const NavigationItemContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`
+
+export const StyledTitle = styled.span`
   color: white;
 `
 
@@ -34,14 +44,15 @@ const NavigationItem: FC<INavigationItemProps> = ({ icon, title, path }) => {
 
   return (
     <Link to={path}>
-      <StyledNavigationItem active={`${isCurrentPath}`}>
-        <Space size={8}>
-          {icon}
-          <StyledTitle>{title}</StyledTitle>
-        </Space>
-      </StyledNavigationItem>
+      <NavigationItemContainer>
+        <StyledNavigationItem active={`${isCurrentPath}`}>
+          <Space size={8}>
+            {icon}
+            <StyledTitle>{title}</StyledTitle>
+          </Space>
+        </StyledNavigationItem>
+      </NavigationItemContainer>
     </Link>
   )
 }
-
 export default NavigationItem

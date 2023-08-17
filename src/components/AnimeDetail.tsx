@@ -7,7 +7,7 @@ import { Layout, Rate, Skeleton, Tag, Typography } from 'antd'
 import { IAnimeDetailsData } from '../types/anime/IAnimeDetails'
 import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
 import { styled } from 'styled-components'
-import { StyledImage } from './AnimeCards'
+import { StyledImage } from './AnimeList'
 import ReactPlayer from 'react-player'
 
 const { Content } = Layout
@@ -52,6 +52,9 @@ const CustomStyledImage = styled(StyledImage)`
 
 const StyledContent = styled(Content)`
   background-color: #202020;
+  overflow: auto;
+  height: 100vh;
+  padding-bottom: 100px;
 `
 
 const StyledTitle = styled(Title)`
@@ -174,7 +177,7 @@ const AnimeDetail: FC = () => {
       ) : null
 
     return (
-      <>
+      <StyledContent>
         <TitleContainer>
           <StyledTitle style={{ margin: 0 }} level={2}>
             {showTitle}
@@ -195,13 +198,13 @@ const AnimeDetail: FC = () => {
             {showTrailer}
           </RightCol>
         </ContentContainer>
-      </>
+      </StyledContent>
     )
   }
 
   const animeDetail = renderAnimeDetail()
 
-  return <StyledContent>{animeDetail}</StyledContent>
+  return <>{animeDetail}</>
 }
 
 export default AnimeDetail

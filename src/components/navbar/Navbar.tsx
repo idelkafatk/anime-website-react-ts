@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Button, Layout } from 'antd'
 import { styled } from 'styled-components'
-import { useHistory, useLocation } from 'react-router-dom'
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import SearchContainer from './SearchContainer'
 
@@ -27,19 +26,8 @@ const StyledArrowLeftOutlined = styled(ArrowLeftOutlined)`
 `
 
 const Navbar: FC = () => {
-  const homePage = '/'
-  const history = useHistory()
-  const location = useLocation()
-  const isHomePage = location.pathname === homePage
-
   return (
     <StyledHeader>
-      {!isHomePage && (
-        <StyledArrowLeftOutlined
-          style={{ display: 'flex', justifySelf: 'center' }}
-          onClick={() => history.push(homePage)}
-        />
-      )}
       <SearchContainer />
       <Button type="primary">Primary Btn</Button>
     </StyledHeader>

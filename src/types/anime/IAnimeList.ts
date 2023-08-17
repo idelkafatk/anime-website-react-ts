@@ -9,6 +9,9 @@ export interface IAnimeItem {
     title: string
     main_picture: IAnimePicture
   }
+  ranking: {
+    rank: number
+  }
 }
 
 export default interface IAnimeList {

@@ -17,8 +17,13 @@ const currentOffsetSlice = createSlice({
     updateCurrentOffset: (state, action) => {
       state.currentOffset = action.payload
     },
+    updateCurrentLimit: (state, action) => {
+      state.limit = action.payload
+    },
   },
 })
 
-export const { updateCurrentOffset } = currentOffsetSlice.actions
+export const { updateCurrentOffset, updateCurrentLimit } =
+  currentOffsetSlice.actions
+
 export default currentOffsetSlice.reducer
