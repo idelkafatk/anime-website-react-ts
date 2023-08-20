@@ -1,13 +1,12 @@
 import axios from 'axios'
 import { apiToken } from '../../animeToken'
 
-const CORS_ANYWHERE_URL =
-  'https://anime-website-react-ts.vercel.app/api/cors?url=' // Адрес сервера CORS Anywhere
+const CORS_ANYWHERE_URL = 'https://anime-website-react-ts.vercel.app/api/cors' // Адрес сервера CORS Anywhere
 const API_URL_MAL = 'https://api.myanimelist.net/v2'
 const API_URL_UMAL = 'https://api.jikan.moe/v4' // unofficial mal
 
 const mal = axios.create({
-  baseURL: CORS_ANYWHERE_URL + encodeURIComponent(API_URL_MAL),
+  baseURL: API_URL_MAL,
   headers: {
     Authorization: `Bearer ${apiToken}`,
   },
