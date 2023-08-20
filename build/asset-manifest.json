@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/static/js/main.62c53f83.js",
+    "index.html": "/index.html",
+    "static/media/antCustomStyles.less": "/static/media/antCustomStyles.08573df0a74f6d3975d1.less",
+    "main.62c53f83.js.map": "/static/js/main.62c53f83.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.62c53f83.js"
+  ]
+}
