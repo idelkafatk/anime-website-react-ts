@@ -1,5 +1,6 @@
 // api/cors.js
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const corsProxy = require('cors-anywhere')
 
 const host = '0.0.0.0'
