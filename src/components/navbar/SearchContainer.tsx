@@ -29,7 +29,7 @@ const SearchContainer: FC = () => {
       setSearchError(false)
       dispatch(updateSearchQuery(value))
 
-      history.push('/search')
+      history.push('/')
     } else {
       setSearchError(true)
 

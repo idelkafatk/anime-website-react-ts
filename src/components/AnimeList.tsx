@@ -32,6 +32,7 @@ const StyledDivContainer = styled.div`
   display: flex;
   height: calc(100vh - 60px);
   flex-direction: column;
+  justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 30px;
   background-color: #232323;
@@ -116,7 +117,7 @@ interface IAnimeListProps {
   isFetching?: boolean
   handlePageChange?: (type: string) => void
   rank?: number
-  top?: boolean
+  pageable: boolean
   filters?: ReactNode[]
 }
 
@@ -126,7 +127,7 @@ const AnimeList: FC<IAnimeListProps> = ({
   isError,
   isFetching,
   handlePageChange,
-  top,
+  pageable,
   filters,
 }) => {
   const { limit } = useTypedSelector((state) => state.offset)
@@ -214,12 +215,22 @@ const AnimeList: FC<IAnimeListProps> = ({
     <StyledDivContainer>
       {filters && <StyledFilters>{filters}</StyledFilters>}
       {renderedAnimeList}
-      {!top && (
+      {pageable && (
         <PaginationContainer>
           <PaginationElement
             icon={
               <StyledLeftSquareOutlined
-                onClick={() => handlePageChange && handlePageChange('prev')}
+                style={{
+                  cursor:
+                    animeList.paging.previous === undefined
+                      ? 'not-allowed'
+                      : 'pointer',
+                }}
+                onClick={() => {
+                  animeList.paging.previous &&
+                    handlePageChange &&
+                    handlePageChange('prev')
+                }}
               />
             }
             disabled={
@@ -229,7 +240,17 @@ const AnimeList: FC<IAnimeListProps> = ({
           <PaginationElement
             icon={
               <StyledRightSquareOutlined
-                onClick={() => handlePageChange && handlePageChange('next')}
+                style={{
+                  cursor:
+                    animeList.paging.next === undefined
+                      ? 'not-allowed'
+                      : 'pointer',
+                }}
+                onClick={() => {
+                  animeList.paging.next &&
+                    handlePageChange &&
+                    handlePageChange('next')
+                }}
               />
             }
             disabled={

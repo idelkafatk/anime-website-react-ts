@@ -1,14 +1,25 @@
-import React, { FC } from 'react'
-import { useQuery } from 'react-query'
+import React, { FC, useEffect, useState } from 'react'
+import { useMutation, useQuery } from 'react-query'
 import { AnimeService } from '../services/anime/animeApiService'
 import { useParams } from 'react-router-dom'
 import { IParams } from '../types/IParams'
-import { Layout, Rate, Skeleton, Tag, Typography } from 'antd'
+import {
+  Button,
+  Layout,
+  notification,
+  Rate,
+  Skeleton,
+  Tag,
+  Typography,
+} from 'antd'
 import { IAnimeDetailsData } from '../types/anime/IAnimeDetails'
 import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
 import { styled } from 'styled-components'
 import { StyledImage } from './AnimeList'
 import ReactPlayer from 'react-player'
+import { useFavouriteAnimeQuery } from '../hooks/useFavouriteAnimeQuery'
+import IAnimeList from '../types/anime/IAnimeList'
+import { queryClient } from '../app/providers/queryProvider'
 
 const { Content } = Layout
 const { Title, Text } = Typography
@@ -92,8 +103,14 @@ const RateContainer = styled.div`
   padding: 0 50px 0 50px;
 `
 
+const AddToFavouriteContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
 const AnimeDetail: FC = () => {
   const { animeId } = useParams<IParams>()
+  const favouriteAnimeQueryKey = ['favouriteAnime', animeId]
   const {
     data: response,
     isLoading,
@@ -107,8 +124,58 @@ const AnimeDetail: FC = () => {
     },
   )
 
+  const { data: favouriteAnimeData, isFetching: isFavouriteAnimeFetching } =
+    useFavouriteAnimeQuery(favouriteAnimeQueryKey)
+  const favouriteAnimeList: IAnimeList = favouriteAnimeData
+  const [inFavorite, setInFavourite] = useState<boolean>()
+
+  useEffect(() => {
+    const isAnimeInFavorites = favouriteAnimeList?.data.some(
+      ({ node }) => node.id === parseInt(animeId),
+    )
+    setInFavourite(isAnimeInFavorites)
+  }, [favouriteAnimeList, animeId])
+
+  const addToFavourites = useMutation(['animeAddFavourite', animeId], () =>
+    AnimeService.addFavouriteAnimeItem(parseInt(animeId)),
+  )
+  const deleteFromFavourites = useMutation(
+    ['animeDeleteFavourite', animeId],
+    () => AnimeService.deleteFavouriteAnimeItem(parseInt(animeId)),
+  )
+
   if (isError) {
     return <ErrorBoundary />
+  }
+
+  const handleFavourite = async () => {
+    if (addToFavourites.isLoading || deleteFromFavourites.isLoading) {
+      return
+    }
+
+    try {
+      if (inFavorite) {
+        await deleteFromFavourites.mutateAsync()
+        await queryClient.invalidateQueries(favouriteAnimeQueryKey)
+      } else {
+        await addToFavourites.mutateAsync()
+        await queryClient.invalidateQueries(favouriteAnimeQueryKey)
+      }
+
+      notification.success({
+        message: 'Успешно',
+        description: inFavorite
+          ? 'Удалено из избранного'
+          : 'Добавлено в избранное',
+        placement: 'bottomLeft',
+      })
+    } catch (error) {
+      notification.error({
+        message: 'Ошибка',
+        description: 'Произошла ошибка',
+        placement: 'bottomLeft',
+      })
+    }
   }
 
   const renderAnimeDetail = () => {
@@ -190,6 +257,25 @@ const AnimeDetail: FC = () => {
             <RateContainer>
               <Rate value={rate} allowHalf disabled />
             </RateContainer>
+            <AddToFavouriteContainer>
+              <Button
+                type="primary"
+                style={{
+                  width: 200,
+                  textAlign: 'center',
+                  backgroundColor: inFavorite ? 'gray' : '#039750',
+                  border: 0,
+                }}
+                onClick={handleFavourite}
+                loading={
+                  addToFavourites.isLoading ||
+                  deleteFromFavourites.isLoading ||
+                  isFavouriteAnimeFetching
+                }
+              >
+                {inFavorite ? 'В избранном' : 'Добавить в избранное'}
+              </Button>
+            </AddToFavouriteContainer>
           </LeftCol>
           <RightCol>
             <DescriptionContainer>

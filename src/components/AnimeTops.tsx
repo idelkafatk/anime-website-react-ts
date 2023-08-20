@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import { useQuery } from 'react-query'
-import { AnimeService } from '../../services/anime/animeApiService'
+import { AnimeService } from '../services/anime/animeApiService'
 import { Alert } from 'antd'
-import AnimeList from '../AnimeList'
-import AnimeRankType from '../AnimeRankType'
+import AnimeList from './AnimeList'
+import AnimeRankType from './AnimeRankType'
 
 const AnimeTops: FC = () => {
   const limit = 100
@@ -11,7 +11,6 @@ const AnimeTops: FC = () => {
   const [rankType, setRankType] = useState(filters[0])
 
   const handleAnimeRankingType = (type: string) => {
-    console.log(type)
     setRankType(type)
   }
 
@@ -47,7 +46,7 @@ const AnimeTops: FC = () => {
       isLoading={isLoading}
       isError={isError}
       isFetching={isFetching}
-      top={true}
+      pageable={false}
     />
   )
 }

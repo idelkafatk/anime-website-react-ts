@@ -40,7 +40,11 @@ const AnimeSearch: FC = () => {
   return query === '' || isLoading || isFetching ? (
     <CustomEmpty description={emptyText} loading={isLoading || isFetching} />
   ) : (
-    <AnimeList animeList={response} handlePageChange={handlePageChange} />
+    <AnimeList
+      animeList={response}
+      handlePageChange={handlePageChange}
+      pageable={true}
+    />
   )
 }
 

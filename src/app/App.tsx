@@ -8,10 +8,10 @@ import { Layout } from 'antd'
 import Sidebar from '../components/Sidebar'
 import { store } from '../store'
 import { Provider } from 'react-redux'
-import AnimeTops from '../components/navigation/AnimeTops'
+import AnimeTops from '../components/AnimeTops'
 import AnimeSearch from '../components/AnimeSearch'
 import AnimeDetail from '../components/AnimeDetail'
-import AnimeSlider from '../components/AnimeSlider'
+import FavouriteAnimeList from '../components/FavouriteAnimeList'
 
 const App: FC = () => {
   return (
@@ -28,11 +28,6 @@ const App: FC = () => {
                   <Switch>
                     <Route exact path={'/'}>
                       <StyledContent>
-                        <AnimeSlider />
-                      </StyledContent>
-                    </Route>
-                    <Route exact path={'/search'}>
-                      <StyledContent>
                         <AnimeSearch />
                       </StyledContent>
                     </Route>
@@ -43,6 +38,9 @@ const App: FC = () => {
                     </Route>
                     <Route exact path={'/anime/:animeId'}>
                       <AnimeDetail />
+                    </Route>
+                    <Route exact path={'/favourite'}>
+                      <FavouriteAnimeList />
                     </Route>
                   </Switch>
                 </Layout>

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button, Layout } from 'antd'
+import { Layout } from 'antd'
 import { styled } from 'styled-components'
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import SearchContainer from './SearchContainer'
@@ -29,7 +29,6 @@ const Navbar: FC = () => {
   return (
     <StyledHeader>
       <SearchContainer />
-      <Button type="primary">Primary Btn</Button>
     </StyledHeader>
   )
 }

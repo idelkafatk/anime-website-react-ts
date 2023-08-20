@@ -39,4 +39,16 @@ export const AnimeService = {
       },
     })
   },
+
+  async getUserAnimeList(user = '@me') {
+    return mal.get(`/users/${user}/animelist`)
+  },
+
+  async addFavouriteAnimeItem(animeId: number) {
+    return mal.patch(`/anime/${animeId}/my_list_status`)
+  },
+
+  async deleteFavouriteAnimeItem(animeId: number) {
+    return mal.delete(`/anime/${animeId}/my_list_status`)
+  },
 }

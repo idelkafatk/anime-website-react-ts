@@ -1,6 +1,10 @@
 import { styled } from 'styled-components'
 import React, { FC } from 'react'
-import { NumberOutlined, SearchOutlined } from '@ant-design/icons'
+import {
+  HeartOutlined,
+  NumberOutlined,
+  SearchOutlined,
+} from '@ant-design/icons'
 import NavigationItem from './NavigationItem'
 
 const StyledNavigationItems = styled.div`
@@ -16,18 +20,18 @@ const NavigationContainer: FC = () => {
     <StyledNavigationItems>
       <NavigationItem
         icon={<NumberOutlined style={{ color: 'white' }} />}
-        title={'Главная'}
-        path={'/'}
-      />
-      <NavigationItem
-        icon={<NumberOutlined style={{ color: 'white' }} />}
         title={'Топ 100'}
         path={'/top'}
       />
       <NavigationItem
         icon={<SearchOutlined style={{ color: 'white' }} />}
         title={'Поиск'}
-        path={'/search'}
+        path={'/'}
+      />
+      <NavigationItem
+        icon={<HeartOutlined style={{ color: 'white' }} />}
+        title={'Избранное'}
+        path={'/favourite'}
       />
     </StyledNavigationItems>
   )
