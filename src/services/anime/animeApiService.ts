@@ -6,7 +6,7 @@ const API_URL_MAL = 'https://api.myanimelist.net/v2'
 const API_URL_UMAL = 'https://api.jikan.moe/v4' // unofficial mal
 
 const mal = axios.create({
-  baseURL: CORS_ANYWHERE_URL + API_URL_MAL,
+  baseURL: API_URL_MAL,
   headers: {
     Authorization: `Bearer ${apiToken}`,
   },
