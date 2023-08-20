@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "src/api/cors",
-      "destination": "src/api/cors.js"
+      "source": "api/cors",
+      "destination": "api/cors.js"
     }
   ]
 }
