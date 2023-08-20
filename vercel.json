@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/cors.js": {
-      "runtime": "nodejs18"
-    }
-  }
-}
