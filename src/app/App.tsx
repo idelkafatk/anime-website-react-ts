@@ -1,17 +1,14 @@
 import React, { FC } from 'react'
-import Navbar from '../components/navbar/Navbar'
-import { StyledContent } from '../components/Content'
-import GlobalStyle from './globals/GlobalStyle'
-import { QueryProvider } from './providers/queryProvider'
+import GlobalStyle from './styles/GlobalStyle'
+import { QueryProvider } from './providers'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
-import Sidebar from '../components/Sidebar'
-import { store } from '../store'
+import { store } from './redux'
 import { Provider } from 'react-redux'
-import AnimeTops from '../components/AnimeTops'
-import AnimeSearch from '../components/AnimeSearch'
-import AnimeDetail from '../components/AnimeDetail'
-import FavouriteAnimeList from '../components/FavouriteAnimeList'
+import { AnimeFavouritePage, AnimeTopPage, SearchPage } from '../pages/anime'
+import { Sidebar } from '../shared/ui/navigation'
+import { PageHeader } from '../shared/ui/header'
+import { AnimeDetail } from '../widgets/anime'
 
 const App: FC = () => {
   return (
@@ -21,26 +18,22 @@ const App: FC = () => {
         <Provider store={store}>
           <BrowserRouter>
             <Layout>
-              <Navbar />
+              <PageHeader />
               <Layout>
                 <Sidebar />
                 <Layout>
                   <Switch>
-                    <Route exact path={'/'}>
-                      <StyledContent>
-                        <AnimeSearch />
-                      </StyledContent>
-                    </Route>
                     <Route exact path={'/top'}>
-                      <StyledContent>
-                        <AnimeTops />
-                      </StyledContent>
+                      <AnimeTopPage />
+                    </Route>
+                    <Route exact path={'/'}>
+                      <SearchPage />
                     </Route>
                     <Route exact path={'/anime/:animeId'}>
                       <AnimeDetail />
                     </Route>
                     <Route exact path={'/favourite'}>
-                      <FavouriteAnimeList />
+                      <AnimeFavouritePage />
                     </Route>
                   </Switch>
                 </Layout>

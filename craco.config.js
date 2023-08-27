@@ -9,7 +9,7 @@ module.exports = {
         lessLoaderOptions: {
           lessOptions: {
             modifyVars: {
-              hack: `true; @import "${__dirname}/src/app/globals/antCustomStyles.less";`,
+              hack: `true; @import "${__dirname}/src/app/styles/antCustomStyles.less";`,
             },
             javascriptEnabled: true,
           },
